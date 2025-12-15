@@ -1,0 +1,382 @@
+// task-157
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    const int N = 7;
+    int a[N];
+    int sum = 0;
+
+    cout << "Ввод массива целых чисел\n";
+    cout << "После ввода каждого числа нажмите <Enter>\n";
+
+    // Ввод массива
+    for (int i = 0; i < N; i++) {
+        cout << "a[" << i << "] -> ";
+        cin >> a[i];
+        sum += a[i];
+    }
+
+    // Вывод массива
+    cout << "Массив: ";
+    for (int i = 0; i < N; i++) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+
+    // Среднее арифметическое
+    double average = (double)sum / N;
+
+    cout << fixed << setprecision(2);
+    cout << "Среднее арифметическое: " << average << endl;
+
+    return 0;
+}
+
+//----------------------------------------------------------------------------------------------
+
+// task-158
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int SIZE = 5;
+    int a[SIZE];
+    int count = 0;
+
+    cout << "Введите массив целых чисел.\n";
+    cout << "После ввода каждого числа нажимайте <Enter>\n";
+
+    for (int i = 0; i < SIZE; i++) {
+        cout << "a[" << i + 1 << "] -> ";
+        cin >> a[i];
+        if (a[i] != 0)
+            count++;
+    }
+
+    cout << "В массиве " << count << " ненулевых элемента\n";
+    return 0;
+}
+
+//----------------------------------------------------------------------------------------------
+
+// task-159
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int N = 5;
+    int a[N];
+    int minIndex = 0;
+
+    cout << "Поиск минимального элемента массива\n";
+    cout << "Введите в одной строке " << N 
+         << " целых чисел и нажмите <Enter>\n";
+    cout << "-> ";
+
+    // Ввод массива
+    for (int i = 0; i < N; i++) {
+        cin >> a[i];
+    }
+
+    // Поиск минимального элемента
+    for (int i = 1; i < N; i++) {
+        if (a[i] < a[minIndex]) {
+            minIndex = i;
+        }
+    }
+
+    cout << "Минимальный элемент массива: " 
+         << a[minIndex] << endl;
+
+    return 0;
+}
+
+//----------------------------------------------------------------------------------------------
+
+// task-160
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a[5];
+    cout << "Введите 5 целых чисел\n-> ";
+    for (int i = 0; i < 5; i++) cin >> a[i];
+
+    int* min = a;
+    for (int i = 1; i < 5; i++)
+        if (*(a+i) < *min) min = a+i;
+
+    cout << "Минимальный элемент массива: " << *min << endl;
+    return 0;
+}
+
+//----------------------------------------------------------------------------------------------
+
+// task-161
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    const int SIZE = 10;
+    int a[SIZE];
+    int sum = 0;
+    int count = 0;
+
+    cout << "Введите элементы массива (10 целых чисел в одной строке)\n";
+    cout << "и нажмите <Enter>\n";
+    cout << "-> ";
+
+    for (int i = 0; i < SIZE; i++) {
+        cin >> a[i];
+        if (a[i] != 0) {
+            sum += a[i];
+            count++;
+        }
+    }
+
+    cout << "Сумма элементов массива: " << sum << endl;
+    cout << "Количество ненулевых элементов: " << count << endl;
+
+    if (count > 0) {
+        double avg = (double)sum / count;
+        cout << fixed << setprecision(2);
+        cout << "Среднее арифметическое ненулевых элементов: " << avg << endl;
+    } else {
+        cout << "Ненулевых элементов нет.\n";
+    }
+
+    return 0;
+}
+
+//----------------------------------------------------------------------------------------------
+
+// task-162
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int SIZE = 10;
+    int a[SIZE];
+    int min, max;
+    int sum = 0;
+
+    cout << "Среднее арифметическое без учета min и max значений\n";
+    cout << "Введите массив (10 целых чисел в одной строке)\n";
+    cout << "-> ";
+
+    // Ввод массива
+    for (int i = 0; i < SIZE; i++) {
+        cin >> a[i];
+    }
+
+    // Инициализация min и max
+    min = max = a[0];
+
+    // Поиск min и max
+    for (int i = 1; i < SIZE; i++) {
+        if (a[i] < min) min = a[i];
+        if (a[i] > max) max = a[i];
+    }
+
+    // Сумма без min и max
+    for (int i = 0; i < SIZE; i++) {
+        sum += a[i];
+    }
+
+    sum -= (min + max);
+
+    double average = sum / double(SIZE - 2);
+
+    cout << "Минимальный элемент: " << min << endl;
+    cout << "Максимальный элемент: " << max << endl;
+    cout.setf(ios::fixed);
+    cout.precision(2);
+    cout << "Среднее арифм. без учета min и max значений: "
+         << average << endl;
+
+    return 0;
+}
+
+//----------------------------------------------------------------------------------------------
+
+// task-163
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    const char* days[] = {
+        "Понедельник","Вторник","Среда",
+        "Четверг","Пятница","Суббота","Воскресенье"
+    };
+
+    float t, sum = 0;
+    for (int i = 0; i < 7; i++) {
+        cout << days[i] << " -> ";
+        cin >> t;
+        sum += t;
+    }
+
+    cout << fixed << setprecision(2);
+    cout << "Средняя температура за неделю: "
+         << sum / 7 << " град.\n";
+}
+
+//----------------------------------------------------------------------------------------------
+
+// task-164
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int N = 5;
+    int a[N];      // массив
+    int sample;    // образец для поиска
+    bool found = false;
+    int index = -1;
+
+    cout << "Поиск в массиве методом перебора\n";
+    cout << "Введите в одной строке " << N
+         << " целых чисел и нажмите <Enter>\n";
+    cout << "-> ";
+    for (int i = 0; i < N; i++) {
+        cin >> a[i];
+    }
+
+    cout << "Введите образец для поиска (целое число) -> ";
+    cin >> sample;
+
+    // поиск простым перебором
+    for (int i = 0; i < N; i++) {
+        if (a[i] == sample) {
+            found = true;
+            index = i;
+            break;
+        }
+    }
+
+    if (found) {
+        cout << "Совпадение с элементом номер " << index + 1 << endl;
+    } else {
+        cout << "Совпадений с образцом нет\n";
+    }
+
+    return 0;
+}
+
+//----------------------------------------------------------------------------------------------
+
+// task-165
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int N = 5;
+    int a[N];
+    bool ok = true;
+
+    cout << "Проверка, упорядочен ли массив\n";
+    cout << "по возрастанию\n";
+    cout << "Введите массив (" << N << " целых чисел в одной строке) и нажмите <Enter>\n";
+
+    for (int i = 0; i < N; i++) {
+        cin >> a[i];
+    }
+
+    for (int i = 0; i < N - 1; i++) {
+        if (a[i] > a[i + 1]) {
+            ok = false;
+            break;
+        }
+    }
+
+    cout << "Элементы массива ";
+    if (!ok)
+        cout << "не ";
+    cout << "упорядочены по возрастанию\n";
+
+    return 0;
+}
+
+//----------------------------------------------------------------------------------------------
+
+// task-166
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int N = 5;
+    int a[N];     // массив
+    int obr;      // искомое число
+    int count = 0;
+
+    cout << "Введите массив (" << N << " целых чисел в одной строке)\n";
+    cout << "-> ";
+    for (int i = 0; i < N; i++) {
+        cin >> a[i];
+    }
+
+    cout << "Введите образец для сравнения -> ";
+    cin >> obr;
+
+    for (int i = 0; i < N; i++) {
+        if (a[i] == obr)
+            count++;
+    }
+
+    if (count > 0)
+        cout << "Число " << obr << " встречается в массиве " << count << " раз\n";
+    else
+        cout << "Ни один элемент массива не равен образцу\n";
+
+    return 0;
+}
+
+//----------------------------------------------------------------------------------------------
+
+// task-167
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int N = 5;   // размер массива
+    int a[N];
+    bool same = false;
+
+    cout << "Введите массив (" << N << " целых чисел в одной строке)\n";
+    cout << "-> ";
+    for (int i = 0; i < N; i++) {
+        cin >> a[i];
+    }
+
+    // Проверка на одинаковые элементы
+    for (int i = 0; i < N - 1 && !same; i++) {
+        for (int j = i + 1; j < N; j++) {
+            if (a[i] == a[j]) {
+                same = true;
+                break;
+            }
+        }
+    }
+
+    if (same)
+        cout << "В массиве есть элементы с одинаковым значением\n";
+    else
+        cout << "Все элементы массива различны\n";
+
+    return 0;
+}
